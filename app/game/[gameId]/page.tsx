@@ -50,74 +50,82 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
-      <section className="grid gap-4 xl:grid-cols-[320px,minmax(0,1fr)] xl:items-start">
-        <div className="grid max-w-[320px] gap-4">
-          <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
-              <WatchlistButton label="Save" />
-            </div>
-            <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
-              <div className="flex flex-col items-center gap-2 text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                  {game.awayTeam.logoUrl ? (
-                    <Image
-                      src={game.awayTeam.logoUrl}
-                      alt={`${game.awayTeam.city} ${game.awayTeam.name} logo`}
-                      width={56}
-                      height={56}
-                      className="h-14 w-14 object-contain"
-                      unoptimized
-                    />
-                  ) : (
-                    <span className="text-sm font-semibold text-white">{game.awayTeam.code}</span>
-                  )}
+      <section className="grid gap-4">
+        <div className="grid gap-4 xl:grid-cols-[320px,minmax(0,1fr)] xl:items-start">
+          <div className="grid max-w-[320px] gap-4">
+            <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+              <div className="mb-3 flex items-center justify-between gap-3">
+                <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
+                <WatchlistButton label="Save" />
+              </div>
+              <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                    {game.awayTeam.logoUrl ? (
+                      <Image
+                        src={game.awayTeam.logoUrl}
+                        alt={`${game.awayTeam.city} ${game.awayTeam.name} logo`}
+                        width={56}
+                        height={56}
+                        className="h-14 w-14 object-contain"
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="text-sm font-semibold text-white">{game.awayTeam.code}</span>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{game.awayTeam.code}</p>
+                    <p className="text-[11px] text-zinc-400">{game.awayTeam.name}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{game.awayTeam.code}</p>
-                  <p className="text-[11px] text-zinc-400">{game.awayTeam.name}</p>
+                <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
+                <div className="flex flex-col items-center gap-2 text-center">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                    {game.homeTeam.logoUrl ? (
+                      <Image
+                        src={game.homeTeam.logoUrl}
+                        alt={`${game.homeTeam.city} ${game.homeTeam.name} logo`}
+                        width={56}
+                        height={56}
+                        className="h-14 w-14 object-contain"
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="text-sm font-semibold text-white">{game.homeTeam.code}</span>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{game.homeTeam.code}</p>
+                    <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
+                  </div>
                 </div>
               </div>
-              <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
-              <div className="flex flex-col items-center gap-2 text-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                  {game.homeTeam.logoUrl ? (
-                    <Image
-                      src={game.homeTeam.logoUrl}
-                      alt={`${game.homeTeam.city} ${game.homeTeam.name} logo`}
-                      width={56}
-                      height={56}
-                      className="h-14 w-14 object-contain"
-                      unoptimized
-                    />
-                  ) : (
-                    <span className="text-sm font-semibold text-white">{game.homeTeam.code}</span>
-                  )}
+              <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-zinc-500">Time</span>
+                  <span className="text-right text-white">{formatGameTime(game.startTime)}</span>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-white">{game.homeTeam.code}</p>
-                  <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-zinc-500">League</span>
+                  <span className="text-right text-white">{game.league}</span>
                 </div>
-              </div>
-            </div>
-            <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-zinc-500">Time</span>
-                <span className="text-right text-white">{formatGameTime(game.startTime)}</span>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-zinc-500">League</span>
-                <span className="text-right text-white">{game.league}</span>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-zinc-500">Venue</span>
-                <span className="text-right text-white">{game.venue}</span>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="text-zinc-500">Venue</span>
+                  <span className="text-right text-white">{game.venue}</span>
+                </div>
               </div>
             </div>
           </div>
 
+          <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
+        </div>
+
+        <div className="grid gap-4 xl:grid-cols-[320px,minmax(0,1fr)]">
           <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
-            <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market snapshot</p>
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market snapshot</p>
+            </div>
             <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
               <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
                 <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">ML</p>
@@ -143,10 +151,6 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
               <p className="mt-2 text-sm text-zinc-200">{game.marketSummary}</p>
             </div>
           </div>
-        </div>
-
-        <div className="grid min-w-0 gap-4">
-          <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
           <div className="grid gap-4 lg:grid-cols-2">
             <TrendChart title="Spread movement" data={game.lineHistory} dataKey="spread" stroke="#58c7ff" />
             <TrendChart title="Total movement" data={game.lineHistory} dataKey="total" stroke="#9fffaf" />
