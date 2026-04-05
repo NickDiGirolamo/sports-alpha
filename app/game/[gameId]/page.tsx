@@ -57,9 +57,6 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
               <div className="mb-3 flex w-full justify-center">
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
               </div>
-              <div className="absolute right-3 top-3 sm:right-4 sm:top-4">
-                <WatchlistButton label="Save" />
-              </div>
               <div className="flex items-center justify-center gap-3">
                 <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
                   {game.awayTeam.logoUrl ? (
@@ -116,6 +113,9 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
                   <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Venue</p>
                   <p className="mt-1 text-white">{game.venue}</p>
                 </div>
+              </div>
+              <div className="mt-3 flex w-full justify-center">
+                <WatchlistButton label="Save" />
               </div>
             </div>
           </div>
