@@ -58,47 +58,47 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
                 <WatchlistButton label="Save" />
               </div>
-              <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
-                <div className="flex flex-col items-center gap-2 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                    {game.awayTeam.logoUrl ? (
-                      <Image
-                        src={game.awayTeam.logoUrl}
-                        alt={`${game.awayTeam.city} ${game.awayTeam.name} logo`}
-                        width={56}
-                        height={56}
-                        className="h-14 w-14 object-contain"
-                        unoptimized
-                      />
-                    ) : (
-                      <span className="text-sm font-semibold text-white">{game.awayTeam.code}</span>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{game.awayTeam.code}</p>
-                    <p className="text-[11px] text-zinc-400">{game.awayTeam.name}</p>
-                  </div>
+              <div className="flex items-center justify-center gap-3">
+                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  {game.awayTeam.logoUrl ? (
+                    <Image
+                      src={game.awayTeam.logoUrl}
+                      alt={`${game.awayTeam.city} ${game.awayTeam.name} logo`}
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-white">{game.awayTeam.code}</span>
+                  )}
                 </div>
-                <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
-                <div className="flex flex-col items-center gap-2 text-center">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
-                    {game.homeTeam.logoUrl ? (
-                      <Image
-                        src={game.homeTeam.logoUrl}
-                        alt={`${game.homeTeam.city} ${game.homeTeam.name} logo`}
-                        width={56}
-                        height={56}
-                        className="h-14 w-14 object-contain"
-                        unoptimized
-                      />
-                    ) : (
-                      <span className="text-sm font-semibold text-white">{game.homeTeam.code}</span>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{game.homeTeam.code}</p>
-                    <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
-                  </div>
+                <div className="rounded-full border border-white/10 bg-white/[0.05] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-zinc-400">
+                  x
+                </div>
+                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  {game.homeTeam.logoUrl ? (
+                    <Image
+                      src={game.homeTeam.logoUrl}
+                      alt={`${game.homeTeam.city} ${game.homeTeam.name} logo`}
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-white">{game.homeTeam.code}</span>
+                  )}
+                </div>
+              </div>
+              <div className="mt-3 grid grid-cols-2 gap-3 text-center">
+                <div>
+                  <p className="text-sm font-semibold text-white">{game.awayTeam.code}</p>
+                  <p className="text-[11px] text-zinc-400">{game.awayTeam.name}</p>
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{game.homeTeam.code}</p>
+                  <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
                 </div>
               </div>
               <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
