@@ -32,6 +32,7 @@ export function MatchupMetricsChart({
               width={88}
             />
             <Tooltip
+              cursor={{ fill: "rgba(161, 161, 170, 0.10)" }}
               contentStyle={{
                 background: "rgba(9, 9, 11, 0.94)",
                 border: "1px solid rgba(255,255,255,0.08)",
