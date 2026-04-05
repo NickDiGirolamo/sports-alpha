@@ -1,13 +1,15 @@
 import { notFound } from "next/navigation";
+import { GameFactGrid } from "@/components/game-fact-grid";
 import { LineMovementIndicator } from "@/components/line-movement-indicator";
 import { MarketOverview } from "@/components/market-overview";
+import { MatchupMetricsChart } from "@/components/matchup-metrics-chart";
 import { PageHeader } from "@/components/page-header";
 import { TeamComparisonTable } from "@/components/team-comparison-table";
 import { TeamPill } from "@/components/team-pill";
 import { TrendChart } from "@/components/trend-chart";
 import { WatchlistButton } from "@/components/watchlist-button";
 import { getGameById } from "@/lib/data/service";
-import { formatGameTime } from "@/lib/utils";
+import { calculateHold, formatGameTime, moneylineToProbability } from "@/lib/utils";
 
 export default async function GameDetailPage({ params }: { params: Promise<{ gameId: string }> }) {
   const { gameId } = await params;
@@ -16,6 +18,35 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
   if (!game) {
     notFound();
   }
+
+  const factGrid = [
+    {
+      label: "Market hold",
+      value: `${calculateHold(game.currentLine.moneyline.home, game.currentLine.moneyline.away).toFixed(2)}%`,
+      detail: "Useful for identifying whether the current book price is efficient or inflated.",
+    },
+    {
+      label: "Spread gap",
+      value: `${Math.abs(game.projection.fairSpread - game.currentLine.spread.away).toFixed(1)}`,
+      detail: "Difference between the model fair spread and the current market spread.",
+    },
+    {
+      label: "Total gap",
+      value: `${Math.abs(game.projection.fairTotal - game.currentLine.total.points).toFixed(1)}`,
+      detail: "Helps identify whether the game environment is richer or lower scoring than the market implies.",
+    },
+    {
+      label: "Home implied %",
+      value: `${(moneylineToProbability(game.currentLine.moneyline.home) * 100).toFixed(1)}%`,
+      detail: "Current moneyline translated into market win probability for the home side.",
+    },
+  ];
+
+  const chartMetrics = game.metrics.slice(0, 5).map((metric) => ({
+    metric: metric.label,
+    away: Number(metric.awayValue.toFixed(1)),
+    home: Number(metric.homeValue.toFixed(1)),
+  }));
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
@@ -99,6 +130,8 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
         </div>
       </section>
 
+      <GameFactGrid facts={factGrid} />
+
       <section className="grid gap-6 xl:grid-cols-[1.15fr,0.85fr]">
         <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div className="mb-5">
@@ -136,6 +169,8 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
           </div>
         </div>
       </section>
+
+      <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
 
       <section className="grid gap-6 xl:grid-cols-2">
         <TrendChart title="Spread movement" data={game.lineHistory} dataKey="spread" stroke="#58c7ff" />
