@@ -39,10 +39,10 @@ export function HeroSummary({ games }: { games: Array<Game & { awayTeam: Team; h
         </div>
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
-            href="/slate"
+            href="/odds"
             className="inline-flex items-center gap-2 rounded-full border border-lime-300/25 bg-lime-300/12 px-5 py-3 text-sm font-medium text-lime-50 transition hover:bg-lime-300/18"
           >
-            View full slate
+            Open odds board
             <ArrowRight className="h-4 w-4" />
           </Link>
           <Link
