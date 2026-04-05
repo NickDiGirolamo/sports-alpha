@@ -50,36 +50,89 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
-      <PageHeader
-        eyebrow="Matchup analysis"
-        title={`${game.awayTeam.city} ${game.awayTeam.name} at ${game.homeTeam.city} ${game.homeTeam.name}`}
-        description="Flagship game page combining the market, team comparison, situational context, injuries, and a transparent projection summary."
-        actions={<WatchlistButton />}
-      />
-
-      <section className="grid gap-6 xl:grid-cols-[1.1fr,0.9fr]">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="grid gap-4 sm:grid-cols-[1fr,auto,1fr] sm:items-center">
+      <section className="grid gap-4 xl:grid-cols-[0.9fr,1.1fr]">
+        <div className="grid gap-4">
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup analysis</p>
+              <WatchlistButton />
+            </div>
+            <div className="grid gap-4 md:grid-cols-[1fr,auto,1fr] md:items-center">
               <TeamPill team={game.awayTeam} />
-              <div className="text-center text-sm uppercase tracking-[0.3em] text-slate-500">at</div>
+              <div className="text-center text-xs uppercase tracking-[0.3em] text-zinc-500">vs</div>
               <TeamPill team={game.homeTeam} align="right" />
             </div>
-            <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-4 text-sm text-slate-300 md:min-w-[220px]">
-              <p>{formatGameTime(game.startTime)}</p>
-              <p className="mt-2">{game.league}</p>
-              <p className="mt-2">{game.venue}</p>
-              {game.weather ? <p className="mt-2 text-zinc-300">{game.weather.summary}</p> : null}
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Game time</p>
+                <p className="mt-1 text-sm font-medium text-white">{formatGameTime(game.startTime)}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">League / Venue</p>
+                <p className="mt-1 text-sm font-medium text-white">{game.league}</p>
+                <p className="mt-1 text-xs text-zinc-400">{game.venue}</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Environment</p>
+                <p className="mt-1 text-sm font-medium text-white">{game.weather ? game.weather.summary : "Indoor / neutral conditions"}</p>
+              </div>
             </div>
           </div>
-          <div className="mt-5 rounded-3xl border border-lime-300/16 bg-lime-300/[0.07] p-4 sm:p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market synopsis</p>
-            <p className="mt-3 text-sm text-zinc-200">{game.marketSummary}</p>
+
+          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+            <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Betting market</p>
+            <div className="mt-4 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-4">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Current</p>
+                <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
+                  <div>
+                    <p className="text-zinc-500">Moneyline</p>
+                    <p className="mt-1 text-white">
+                      {game.awayTeam.code} {game.currentLine.moneyline.away} / {game.homeTeam.code} {game.currentLine.moneyline.home}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500">Spread</p>
+                    <p className="mt-1 text-white">{game.currentLine.spread.away.toFixed(1)}</p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500">Total</p>
+                    <p className="mt-1 text-white">{game.currentLine.total.points.toFixed(1)}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-lime-300/16 bg-lime-300/[0.07] p-4">
+                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-300">Model / market delta</p>
+                <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
+                  <div>
+                    <p className="text-zinc-500">Fair spread</p>
+                    <p className="mt-1 text-white">{game.projection.fairSpread.toFixed(1)}</p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500">Fair total</p>
+                    <p className="mt-1 text-white">{game.projection.fairTotal.toFixed(1)}</p>
+                  </div>
+                  <div>
+                    <p className="text-zinc-500">Edge</p>
+                    <p className="mt-1 text-lime-100">{game.projection.modelEdgePercent.toFixed(1)}%</p>
+                  </div>
+                </div>
+                <p className="mt-3 text-sm text-zinc-200">{game.marketSummary}</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <MarketOverview awayTeam={game.awayTeam} homeTeam={game.homeTeam} currentLine={game.currentLine} openingLine={game.openingLine} />
+        <div className="grid gap-4">
+          <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
+          <div className="grid gap-4 lg:grid-cols-2">
+            <TrendChart title="Spread movement" data={game.lineHistory} dataKey="spread" stroke="#58c7ff" />
+            <TrendChart title="Total movement" data={game.lineHistory} dataKey="total" stroke="#9fffaf" />
+          </div>
+        </div>
       </section>
+
+      <MarketOverview awayTeam={game.awayTeam} homeTeam={game.homeTeam} currentLine={game.currentLine} openingLine={game.openingLine} />
 
       <section className="grid gap-6 xl:grid-cols-[1fr,1fr]">
         <div className="space-y-6 rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
@@ -168,13 +221,6 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
             ))}
           </div>
         </div>
-      </section>
-
-      <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
-
-      <section className="grid gap-6 xl:grid-cols-2">
-        <TrendChart title="Spread movement" data={game.lineHistory} dataKey="spread" stroke="#58c7ff" />
-        <TrendChart title="Total movement" data={game.lineHistory} dataKey="total" stroke="#9fffaf" />
       </section>
     </div>
   );
