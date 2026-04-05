@@ -50,17 +50,21 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
-      <section className="grid gap-4 xl:grid-cols-[0.52fr,1.48fr]">
-        <div className="grid gap-4">
+      <section className="grid gap-4 xl:grid-cols-[320px,minmax(0,1fr)] xl:items-start">
+        <div className="grid max-w-[320px] gap-4">
           <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
               <WatchlistButton label="Save" />
             </div>
             <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
-              <TeamPill team={game.awayTeam} />
+              <div className="scale-[0.92] origin-left">
+                <TeamPill team={game.awayTeam} />
+              </div>
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
-              <TeamPill team={game.homeTeam} align="right" />
+              <div className="scale-[0.92] origin-right">
+                <TeamPill team={game.homeTeam} align="right" />
+              </div>
             </div>
             <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
               <div className="flex items-center justify-between gap-3">
@@ -107,7 +111,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
           </div>
         </div>
 
-        <div className="grid gap-4">
+        <div className="grid min-w-0 gap-4">
           <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
           <div className="grid gap-4 lg:grid-cols-2">
             <TrendChart title="Spread movement" data={game.lineHistory} dataKey="spread" stroke="#58c7ff" />
