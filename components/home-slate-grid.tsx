@@ -26,27 +26,18 @@ export function HomeSlateGrid({
 
   return (
     <section className="space-y-5">
-      <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-zinc-300">Today&apos;s slate</p>
-          <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">Compact matchup board</h3>
-          <p className="mt-2 max-w-3xl text-sm text-zinc-300">
-            Each block is a direct path into the deeper matchup page, where the market, movement, team context, injuries, and model output are broken down in detail.
-          </p>
+      <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Games</p>
+          <p className="mt-1 text-xl font-semibold text-white">{filteredGames.length}</p>
         </div>
-        <div className="grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Games</p>
-            <p className="mt-1 text-xl font-semibold text-white">{filteredGames.length}</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Top edge</p>
-            <p className="mt-1 text-xl font-semibold text-lime-100">{topEdge}%</p>
-          </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
-            <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Books</p>
-            <p className="mt-1 text-xl font-semibold text-white">3</p>
-          </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Top edge</p>
+          <p className="mt-1 text-xl font-semibold text-lime-100">{topEdge}%</p>
+        </div>
+        <div className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3">
+          <p className="text-[11px] uppercase tracking-[0.2em] text-zinc-500">Books</p>
+          <p className="mt-1 text-xl font-semibold text-white">3</p>
         </div>
       </div>
 
