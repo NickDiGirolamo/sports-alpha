@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { BarChart3, Bookmark, Database, Flame, Home, LineChart, Newspaper, ShieldAlert, Swords, Trophy } from "lucide-react";
+import { BarChart3, Bookmark, Database, Flame, Home, LineChart, Newspaper, ShieldAlert, Trophy } from "lucide-react";
 import { ReactNode } from "react";
 
 const navItems = [
   { href: "/", label: "Home", icon: Home },
   { href: "/slate", label: "Today's Slate", icon: BarChart3 },
   { href: "/odds", label: "Odds", icon: LineChart },
-  { href: "/game/nba-bos-den", label: "Matchups", icon: Swords },
   { href: "/teams", label: "Teams", icon: Trophy },
   { href: "/trends", label: "Trends", icon: Flame },
   { href: "/model", label: "Model", icon: ShieldAlert },
