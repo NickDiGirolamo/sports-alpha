@@ -22,7 +22,15 @@ export function MatchupMetricsChart({
           <BarChart data={data} layout="vertical" barCategoryGap={16}>
             <CartesianGrid stroke="rgba(148,163,184,0.10)" horizontal={false} />
             <XAxis type="number" stroke="#71717a" tickLine={false} axisLine={false} />
-            <YAxis dataKey="metric" type="category" stroke="#71717a" tickLine={false} axisLine={false} width={88} />
+            <YAxis
+              dataKey="metric"
+              type="category"
+              stroke="#71717a"
+              tick={{ fontSize: 11, fill: "#a1a1aa" }}
+              tickLine={false}
+              axisLine={false}
+              width={88}
+            />
             <Tooltip
               contentStyle={{
                 background: "rgba(9, 9, 11, 0.94)",
