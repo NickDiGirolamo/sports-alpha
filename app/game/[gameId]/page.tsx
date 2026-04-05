@@ -54,7 +54,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
         <div className="overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div className="flex min-w-[920px] items-start gap-4">
           <div className="w-[300px] shrink-0">
-            <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+            <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4 min-h-[350px]">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
                 <WatchlistButton label="Save" />
