@@ -50,75 +50,59 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
-      <section className="grid gap-4 xl:grid-cols-[0.9fr,1.1fr]">
+      <section className="grid gap-4 xl:grid-cols-[0.52fr,1.48fr]">
         <div className="grid gap-4">
-          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
+          <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup analysis</p>
-              <WatchlistButton />
+              <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
+              <WatchlistButton label="Save" />
             </div>
-            <div className="grid gap-4 md:grid-cols-[1fr,auto,1fr] md:items-center">
+            <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
               <TeamPill team={game.awayTeam} />
-              <div className="text-center text-xs uppercase tracking-[0.3em] text-zinc-500">vs</div>
+              <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
               <TeamPill team={game.homeTeam} align="right" />
             </div>
-            <div className="mt-4 grid gap-3 sm:grid-cols-3">
-              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Game time</p>
-                <p className="mt-1 text-sm font-medium text-white">{formatGameTime(game.startTime)}</p>
+            <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-zinc-500">Time</span>
+                <span className="text-right text-white">{formatGameTime(game.startTime)}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">League / Venue</p>
-                <p className="mt-1 text-sm font-medium text-white">{game.league}</p>
-                <p className="mt-1 text-xs text-zinc-400">{game.venue}</p>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-zinc-500">League</span>
+                <span className="text-right text-white">{game.league}</span>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Environment</p>
-                <p className="mt-1 text-sm font-medium text-white">{game.weather ? game.weather.summary : "Indoor / neutral conditions"}</p>
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-zinc-500">Venue</span>
+                <span className="text-right text-white">{game.venue}</span>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[28px] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
-            <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Betting market</p>
-            <div className="mt-4 grid gap-4 lg:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-4">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-500">Current</p>
-                <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
-                  <div>
-                    <p className="text-zinc-500">Moneyline</p>
-                    <p className="mt-1 text-white">
-                      {game.awayTeam.code} {game.currentLine.moneyline.away} / {game.homeTeam.code} {game.currentLine.moneyline.home}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-zinc-500">Spread</p>
-                    <p className="mt-1 text-white">{game.currentLine.spread.away.toFixed(1)}</p>
-                  </div>
-                  <div>
-                    <p className="text-zinc-500">Total</p>
-                    <p className="mt-1 text-white">{game.currentLine.total.points.toFixed(1)}</p>
-                  </div>
-                </div>
+          <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+            <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market snapshot</p>
+            <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">ML</p>
+                <p className="mt-1 text-white">
+                  {game.awayTeam.code} {game.currentLine.moneyline.away}
+                </p>
+                <p className="text-white">{game.homeTeam.code} {game.currentLine.moneyline.home}</p>
               </div>
-              <div className="rounded-2xl border border-lime-300/16 bg-lime-300/[0.07] p-4">
-                <p className="text-[11px] uppercase tracking-[0.22em] text-zinc-300">Model / market delta</p>
-                <div className="mt-3 grid grid-cols-3 gap-3 text-sm">
-                  <div>
-                    <p className="text-zinc-500">Fair spread</p>
-                    <p className="mt-1 text-white">{game.projection.fairSpread.toFixed(1)}</p>
-                  </div>
-                  <div>
-                    <p className="text-zinc-500">Fair total</p>
-                    <p className="mt-1 text-white">{game.projection.fairTotal.toFixed(1)}</p>
-                  </div>
-                  <div>
-                    <p className="text-zinc-500">Edge</p>
-                    <p className="mt-1 text-lime-100">{game.projection.modelEdgePercent.toFixed(1)}%</p>
-                  </div>
-                </div>
-                <p className="mt-3 text-sm text-zinc-200">{game.marketSummary}</p>
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Spread</p>
+                <p className="mt-1 text-white">{game.currentLine.spread.away.toFixed(1)}</p>
               </div>
+              <div className="rounded-2xl border border-white/10 bg-slate-950/45 p-3">
+                <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Total</p>
+                <p className="mt-1 text-white">{game.currentLine.total.points.toFixed(1)}</p>
+              </div>
+            </div>
+            <div className="mt-3 rounded-2xl border border-lime-300/16 bg-lime-300/[0.07] p-3">
+              <div className="flex items-center justify-between gap-3 text-sm">
+                <span className="text-zinc-300">Model edge</span>
+                <span className="text-lime-100">{game.projection.modelEdgePercent.toFixed(1)}%</span>
+              </div>
+              <p className="mt-2 text-sm text-zinc-200">{game.marketSummary}</p>
             </div>
           </div>
         </div>
