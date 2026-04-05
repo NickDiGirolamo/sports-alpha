@@ -4,7 +4,6 @@ import { GameFactGrid } from "@/components/game-fact-grid";
 import { LineMovementIndicator } from "@/components/line-movement-indicator";
 import { MarketOverview } from "@/components/market-overview";
 import { MatchupMetricsChart } from "@/components/matchup-metrics-chart";
-import { PageHeader } from "@/components/page-header";
 import { TeamComparisonTable } from "@/components/team-comparison-table";
 import { TrendChart } from "@/components/trend-chart";
 import { WatchlistButton } from "@/components/watchlist-button";
@@ -52,11 +51,13 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
     <div className="space-y-4 pb-10 sm:space-y-6">
       <section className="space-y-4">
         <div className="overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex min-w-[920px] items-start gap-4">
+          <div className="flex min-w-[920px] items-stretch gap-4">
           <div className="w-[300px] shrink-0">
-            <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4 min-h-[350px]">
-              <div className="mb-3 flex items-center justify-between gap-3">
+            <div className="relative flex h-full min-h-[350px] flex-col items-center rounded-[26px] border border-white/10 bg-white/[0.03] p-3 text-center sm:p-4">
+              <div className="mb-3 flex w-full justify-center">
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
+              </div>
+              <div className="absolute right-3 top-3 sm:right-4 sm:top-4">
                 <WatchlistButton label="Save" />
               </div>
               <div className="flex items-center justify-center gap-3">
@@ -102,18 +103,18 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
                   <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
                 </div>
               </div>
-              <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-zinc-500">Time</span>
-                  <span className="text-right text-white">{formatGameTime(game.startTime)}</span>
+              <div className="mt-4 grid w-full gap-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-2">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Time</p>
+                  <p className="mt-1 text-white">{formatGameTime(game.startTime)}</p>
                 </div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-zinc-500">League</span>
-                  <span className="text-right text-white">{game.league}</span>
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-2">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">League</p>
+                  <p className="mt-1 text-white">{game.league}</p>
                 </div>
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-zinc-500">Venue</span>
-                  <span className="text-right text-white">{game.venue}</span>
+                <div className="rounded-2xl border border-white/8 bg-white/[0.03] px-3 py-2">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500">Venue</p>
+                  <p className="mt-1 text-white">{game.venue}</p>
                 </div>
               </div>
             </div>

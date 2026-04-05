@@ -12,12 +12,12 @@ export function MatchupMetricsChart({
   homeLabel: string;
 }) {
   return (
-    <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
+    <div className="flex h-full min-h-[350px] flex-col rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
       <div className="mb-5">
         <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Visual comparison</p>
         <h3 className="mt-2 text-xl font-semibold text-white">Where the statistical gap lives</h3>
       </div>
-      <div className="h-[270px] min-w-0">
+      <div className="min-h-[270px] min-w-0 flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} layout="vertical" barCategoryGap={16}>
             <CartesianGrid stroke="rgba(148,163,184,0.10)" horizontal={false} />
