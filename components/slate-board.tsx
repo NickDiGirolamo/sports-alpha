@@ -47,7 +47,7 @@ export function SlateBoard({ games, title = "Daily slate" }: { games: SlateGame[
 
   return (
     <section className="space-y-5">
-      <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-5 xl:flex-row xl:items-center xl:justify-between">
+      <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/[0.03] p-4 sm:p-5 xl:flex-row xl:items-center xl:justify-between">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">{title}</p>
           <p className="mt-2 text-sm text-zinc-300">Sort by sport, biggest movement, or model edge to identify the most actionable spots quickly.</p>
@@ -59,7 +59,7 @@ export function SlateBoard({ games, title = "Daily slate" }: { games: SlateGame[
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Search team or city"
-              className="bg-transparent outline-none placeholder:text-zinc-500"
+              className="w-full min-w-0 bg-transparent outline-none placeholder:text-zinc-500"
             />
           </div>
           <select

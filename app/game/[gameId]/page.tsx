@@ -18,7 +18,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
   }
 
   return (
-    <div className="space-y-6 pb-10">
+    <div className="space-y-4 pb-10 sm:space-y-6">
       <PageHeader
         eyebrow="Matchup analysis"
         title={`${game.awayTeam.city} ${game.awayTeam.name} at ${game.homeTeam.city} ${game.homeTeam.name}`}
@@ -27,21 +27,21 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
       />
 
       <section className="grid gap-6 xl:grid-cols-[1.1fr,0.9fr]">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-6">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="grid gap-5 sm:grid-cols-[1fr,auto,1fr] sm:items-center">
+            <div className="grid gap-4 sm:grid-cols-[1fr,auto,1fr] sm:items-center">
               <TeamPill team={game.awayTeam} />
               <div className="text-center text-sm uppercase tracking-[0.3em] text-slate-500">at</div>
               <TeamPill team={game.homeTeam} align="right" />
             </div>
-            <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-4 text-sm text-slate-300">
+            <div className="rounded-3xl border border-white/10 bg-slate-950/50 p-4 text-sm text-slate-300 md:min-w-[220px]">
               <p>{formatGameTime(game.startTime)}</p>
               <p className="mt-2">{game.league}</p>
               <p className="mt-2">{game.venue}</p>
               {game.weather ? <p className="mt-2 text-zinc-300">{game.weather.summary}</p> : null}
             </div>
           </div>
-          <div className="mt-6 rounded-3xl border border-lime-300/16 bg-lime-300/[0.07] p-5">
+          <div className="mt-5 rounded-3xl border border-lime-300/16 bg-lime-300/[0.07] p-4 sm:p-5">
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market synopsis</p>
             <p className="mt-3 text-sm text-zinc-200">{game.marketSummary}</p>
           </div>
@@ -51,7 +51,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1fr,1fr]">
-        <div className="space-y-6 rounded-[32px] border border-white/10 bg-white/[0.03] p-6">
+        <div className="space-y-6 rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Betting market panel</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">Opening vs current line movement</h3>
@@ -63,7 +63,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
           </div>
         </div>
 
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-6">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Model insight</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">{game.projection.lean}</h3>
@@ -100,7 +100,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[1.15fr,0.85fr]">
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-6">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div className="mb-5">
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Team comparison</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">Which stats matter most here</h3>
@@ -108,7 +108,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
           <TeamComparisonTable awayTeam={game.awayTeam.code} homeTeam={game.homeTeam.code} metrics={game.metrics} />
         </div>
 
-        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-6">
+        <div className="rounded-[32px] border border-white/10 bg-white/[0.03] p-4 sm:p-6">
           <div className="mb-5">
             <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Situational context</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">Trends, injuries, and external factors</h3>
@@ -116,10 +116,10 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
           <div className="space-y-4">
             {game.trends.map((trend) => (
               <div key={trend.label} className="rounded-2xl border border-white/10 bg-slate-950/45 p-4">
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
                   <span className="text-sm text-zinc-400">{trend.label}</span>
                   <span className="text-sm text-white">
-                    {game.awayTeam.code} {trend.away} • {game.homeTeam.code} {trend.home}
+                    {game.awayTeam.code} {trend.away} - {game.homeTeam.code} {trend.home}
                   </span>
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
               <div key={injury.id} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4">
                 <p className="font-medium text-white">{injury.player}</p>
                 <p className="mt-1 text-sm text-zinc-200">
-                  {injury.status} • {injury.impact} impact
+                  {injury.status} - {injury.impact} impact
                 </p>
                 <p className="mt-2 text-sm text-zinc-300">{injury.note}</p>
               </div>
@@ -144,3 +144,4 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
     </div>
   );
 }
+
