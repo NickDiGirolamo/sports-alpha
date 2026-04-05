@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { GameFactGrid } from "@/components/game-fact-grid";
 import { LineMovementIndicator } from "@/components/line-movement-indicator";
@@ -5,7 +6,6 @@ import { MarketOverview } from "@/components/market-overview";
 import { MatchupMetricsChart } from "@/components/matchup-metrics-chart";
 import { PageHeader } from "@/components/page-header";
 import { TeamComparisonTable } from "@/components/team-comparison-table";
-import { TeamPill } from "@/components/team-pill";
 import { TrendChart } from "@/components/trend-chart";
 import { WatchlistButton } from "@/components/watchlist-button";
 import { getGameById } from "@/lib/data/service";
@@ -58,12 +58,46 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
               <WatchlistButton label="Save" />
             </div>
             <div className="grid grid-cols-[1fr,auto,1fr] items-center gap-2">
-              <div className="scale-[0.92] origin-left">
-                <TeamPill team={game.awayTeam} />
+              <div className="flex flex-col items-center gap-2 text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  {game.awayTeam.logoUrl ? (
+                    <Image
+                      src={game.awayTeam.logoUrl}
+                      alt={`${game.awayTeam.city} ${game.awayTeam.name} logo`}
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-white">{game.awayTeam.code}</span>
+                  )}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{game.awayTeam.code}</p>
+                  <p className="text-[11px] text-zinc-400">{game.awayTeam.name}</p>
+                </div>
               </div>
               <div className="text-center text-[10px] uppercase tracking-[0.3em] text-zinc-500">vs</div>
-              <div className="scale-[0.92] origin-right">
-                <TeamPill team={game.homeTeam} align="right" />
+              <div className="flex flex-col items-center gap-2 text-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/[0.06] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+                  {game.homeTeam.logoUrl ? (
+                    <Image
+                      src={game.homeTeam.logoUrl}
+                      alt={`${game.homeTeam.city} ${game.homeTeam.name} logo`}
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                      unoptimized
+                    />
+                  ) : (
+                    <span className="text-sm font-semibold text-white">{game.homeTeam.code}</span>
+                  )}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{game.homeTeam.code}</p>
+                  <p className="text-[11px] text-zinc-400">{game.homeTeam.name}</p>
+                </div>
               </div>
             </div>
             <div className="mt-3 space-y-2 rounded-2xl border border-white/10 bg-slate-950/45 p-3 text-sm">
