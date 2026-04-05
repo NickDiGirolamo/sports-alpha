@@ -52,8 +52,8 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
     <div className="space-y-4 pb-10 sm:space-y-6">
       <section className="space-y-4">
         <div className="overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <div className="grid min-w-[920px] gap-4 grid-cols-[300px,minmax(0,1fr)] items-start">
-          <div className="grid max-w-[320px] gap-4">
+          <div className="flex min-w-[920px] items-start gap-4">
+          <div className="w-[300px] shrink-0">
             <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Matchup</p>
@@ -119,7 +119,9 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
             </div>
           </div>
 
-          <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
+          <div className="min-w-0 flex-1">
+            <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
+          </div>
         </div>
         </div>
 
