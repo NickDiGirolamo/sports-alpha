@@ -50,8 +50,9 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
   return (
     <div className="space-y-4 pb-10 sm:space-y-6">
-      <section className="grid gap-4">
-        <div className="grid gap-4 sm:grid-cols-[280px,minmax(0,1fr)] sm:items-start lg:grid-cols-[320px,minmax(0,1fr)]">
+      <section className="space-y-4">
+        <div className="overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="grid min-w-[920px] gap-4 grid-cols-[300px,minmax(0,1fr)] items-start">
           <div className="grid max-w-[320px] gap-4">
             <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
               <div className="mb-3 flex items-center justify-between gap-3">
@@ -120,8 +121,9 @@ export default async function GameDetailPage({ params }: { params: Promise<{ gam
 
           <MatchupMetricsChart data={chartMetrics} awayLabel={game.awayTeam.code} homeLabel={game.homeTeam.code} />
         </div>
+        </div>
 
-        <div className="grid gap-4 sm:grid-cols-[280px,minmax(0,1fr)] lg:grid-cols-[320px,minmax(0,1fr)]">
+        <div className="grid gap-4 md:grid-cols-[300px,minmax(0,1fr)]">
           <div className="rounded-[26px] border border-white/10 bg-white/[0.03] p-3 sm:p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
               <p className="text-xs uppercase tracking-[0.24em] text-zinc-300">Market snapshot</p>
